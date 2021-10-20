@@ -1,9 +1,13 @@
 import User from "../models/user"
 import IUser from "@/interfaces/IUser"
 
+// maybe not correct way to do this
+type TUserModel = typeof User
+
+//! need to catch errors
 class UserService {
-  UserModel: typeof User
-  constructor(UserModel: typeof User) {
+  UserModel: TUserModel
+  constructor(UserModel: TUserModel) {
     this.UserModel = UserModel
   }
   async AddUser(userInfo: IUser) {

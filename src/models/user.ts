@@ -15,9 +15,6 @@ const User = new mongoose.Schema(
     username: {
       type: String,
     },
-    createdAt: {
-      type: Date,
-    },
   },
   { timestamps: { createdAt: true, updatedAt: false } }
 )

@@ -16,26 +16,11 @@ export default ({ app }: { app: express.Application }) => {
 
   // unknow endpoint
   app.use((req: Request, res: Response, next: express.NextFunction) => {
-    res.status(404).send({ error: "unknown endpoint" })
+    const err = new Error("Not Found") as ResponseError
+    err["status"] = 404
+    next(err)
   })
 
-  /// error handlers
-  app.use(
-    (
-      err: ResponseError,
-      req: Request,
-      res: Response,
-      next: express.NextFunction
-    ) => {
-      /**
-       * Handle 401 thrown by express-jwt library
-       */
-      if (err.name === "UnauthorizedError") {
-        return res.status(err.status).send({ message: err.message }).end()
-      }
-      return next(err)
-    }
-  )
   app.use(
     (
       err: ResponseError,

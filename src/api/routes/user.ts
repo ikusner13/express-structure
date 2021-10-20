@@ -3,6 +3,7 @@ import UserService from "@/services/user"
 
 const route = Router()
 
+//! need to catch errors
 export default (app: Router) => {
   app.use("/users", route)
 
@@ -14,13 +15,10 @@ export default (app: Router) => {
 
   route.post("/", async (req: Request, res: Response) => {
     const user = await UserService.AddUser(req.body)
-    // tslint:disable-next-line:no-console
-    console.log(user)
     if (user) res.json(user)
   })
 
   route.patch("/:userID", async (req: Request, res: Response) => {
-    // res.send("patch")
     const updatedUser = await UserService.updateUserByID(
       req.params.userID,
       req.body
